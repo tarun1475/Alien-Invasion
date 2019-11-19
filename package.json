@@ -1,0 +1,29 @@
+{
+  "name": "Alien-Invasion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tarun1475/Alien-Invasion.git"
+  },
+  "author": "Tarun Gupta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tarun1475/Alien-Invasion.git"
+  },
+  "homepage": "",
+  "devDependencies": {
+    "docha": "^1.0.0",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "sillyname": "^0.1.0"
+  }
+}

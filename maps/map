@@ -1,0 +1,29 @@
+Bremen south=Delmenhorst east=Luneburg north=Bremerhaven west=Oldenburg
+Delmenhorst north=Bremen west=Meppen south=Nienburg
+Nienburg south=Hannover east=Celle north=Delmenhorst
+Hamburg south=Luneburg north=Norderstedt west=Bremerhaven east=Schwerin
+Bremerhaven north=Cuxhaven south=Bremen west=Wilhelmshaven east=Hamburg
+Oldenburg north=Wilhelmshaven south=Delmenhorst east=Bremen west=Emden
+Emden south=Meppen east=Oldenburg north=Wilhelmshaven
+Wilhelmshaven south=Oldenburg west=Emden east=Bremerhaven
+Cuxhaven south=Bremerhaven east=Norderstedt
+Hannover east=Wolfsburg west=Minden north=Nienburg south=Hamelin
+Wolfsburg north=Celle west=Hannover east=Stendal south=Braunschweig
+Luneburg north=Hamburg west=Bremen south=Celle east=Schwerin
+Meppen north=Emden east=Delmenhorst south=Osnabruck
+Norderstedt east=Lubeck north=Neumunster south=Hamburg
+Celle west=Nienburg south=Hamburg east=Wolfsburg north=Bremen
+Schwerin north=Wismar west=Hamburg south=Luneburg
+Stendal west=Wolfsburg south=Magdeburg east=Brandenburg
+Hamelin south=Hildesheim west=Minden east=Braunschweig north=Hannover
+Braunschweig south=Hildesheim east=Magdeburg north=Wolfsburg west=Hamelin
+Magdeburg north=Stendal south=Sachsen west=Braunschweig east=Potsdam
+Minden east=Hamelin north=Nienburg west=Osnabruck
+Osnabruck north=Meppen east=Minden
+Lubeck west=Norderstedt
+Neumunster south=Norderstedt
+Wismar south=Schwerin
+Brandenburg west=Stendal
+Hildesheim north=Braunschweig east=Hamelin
+Sachsen north=Magdeburg
+Potsdam west=Magdeburg
