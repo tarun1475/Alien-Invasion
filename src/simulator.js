@@ -16,10 +16,9 @@ class SimulateInvasion {
     this.worldMap = worldMap;
     this.numOfAliens = numOfAliens;
     this.allCities = this.worldMap.getCities(); // could be used in various operations.
-    this.maxAlienMoves = 10000;
+    this.maximumIterations = 10000;
     this.alienMoves = 0;
     this.aliensTrapped = false;
-    this.aliens = [];
     this.aliensMap = {};
   }
 
@@ -44,8 +43,8 @@ class SimulateInvasion {
     this.spreadAliensOnMap();
 
     // Run each iteration till 10,000 times
-    for (var i = 0; i < this.maxAlienMoves; i++) {
-      let { numOfMoves } = this.playIteration();
+    for (var i = 0; i < this.maximumIterations; i++) {
+      let numOfMoves = this.playIteration();
 
       if (numOfMoves === 0) {
         this.aliensTrapped = true;
@@ -54,6 +53,8 @@ class SimulateInvasion {
 
       this.alienMoves += numOfMoves;
     }
+
+    this.calulateSimulationResults();
   }
 
   /**
@@ -73,12 +74,12 @@ class SimulateInvasion {
       let alien = new Alien(generateName(), citiesArr[cityIndex]);
       let newAlien = alien.getAlien();
 
-      this.aliens.push(newAlien);
-
       // Keep a map of aliens in order to do fast calculations when we need to
       // search and update aliens data.
       this.aliensMap[newAlien.name] = newAlien;
     }
+
+    return true;
   }
 
   /**
@@ -90,12 +91,12 @@ class SimulateInvasion {
     let moves = 0;
     let activeAliens = {};
 
-    // iterate for all aliens
-    for (var i = 0; i < this.numOfAliens; i++) {
-      // check if alien is alive or dead.
-      if (!this.aliens[i].dead) {
-        let city = this.aliens[i].city,
-          name = this.aliens[i].name;
+    let aliensArr = Object.keys(this.aliensMap);
+
+    aliensArr.forEach(alien => {
+      if (!this.aliensMap[alien].dead) {
+        let city = this.aliensMap[alien].city,
+          name = this.aliensMap[alien].name;
 
         // Keep a map of activeAliens in {"cityName":[alien1, alien2]} form.
         // it would make easy to destroy city and number of aliens present.
@@ -106,15 +107,8 @@ class SimulateInvasion {
         } else {
           activeAliens[city] = [name];
         }
-
-        // move the alien randomly in the available directions.
-        let isMoved = this.moveAlienRandomly(this.aliens[i], this.allCities);
-
-        if (isMoved) {
-          moves = 1;
-        }
       }
-    }
+    });
 
     // if we have two or more aliens in a particular city, they kill each other and
     // destroy the city.
@@ -126,9 +120,9 @@ class SimulateInvasion {
       if (aliens.length > 1) {
         // destroy city and both aliens
         let cityName = this.allCities[city].name;
-
         this.allCities[city].destroyed = true;
 
+        // kill all aliens in a city
         aliens.forEach(alien => {
           let searchAlien = this.aliensMap[alien];
           searchAlien.dead = true;
@@ -138,9 +132,21 @@ class SimulateInvasion {
       }
     });
 
-    return {
-      numOfMoves: moves
-    };
+    aliensArr.forEach(alien => {
+      if (!this.aliensMap[alien].dead) {
+        // move the alien randomly in the available directions.
+        let isMoved = this.moveAlienRandomly(
+          this.aliensMap[alien],
+          this.allCities
+        );
+
+        if (isMoved) {
+          moves = 1;
+        }
+      }
+    });
+
+    return moves;
   }
 
   /**
@@ -150,6 +156,7 @@ class SimulateInvasion {
   calulateSimulationResults() {
     // calculate aliveAliens
     let aliensArr = Object.keys(this.aliensMap);
+
     let leftAliens = 0,
       aliveAliens = [];
 
@@ -172,6 +179,11 @@ class SimulateInvasion {
     });
 
     this.printResults(aliveAliens, leftCities);
+
+    return {
+      aliveAliens: aliveAliens,
+      leftCities: leftCities
+    };
   }
 
   /**
@@ -186,11 +198,11 @@ class SimulateInvasion {
     let cityNames = Object.keys(cities);
     let nearByCities = cities[alien.city];
     let nearByCitiesArr = Object.keys(nearByCities);
+    let moved = 0;
 
-    nearByCitiesArr.forEach(city => {
+    for (var i = 0; i < nearByCitiesArr.length; i++) {
       let cityIndex = Math.floor(Math.random() * 3);
       let cityName = nearByCities[nearByCitiesArr[cityIndex]];
-
       if (
         cityName !== "" &&
         cities[cityName] !== undefined &&
@@ -199,17 +211,21 @@ class SimulateInvasion {
         alien.city = cityName;
         return true;
       }
-    });
+    }
 
     return false;
   }
 
   printCityDestroyed(city, aliensPresent) {
-    console.log(
-      `${city} has been destroyed by ${aliensPresent[0]} and ${
-        aliensPresent[1]
-      }`
-    );
+    if (aliensPresent.length === 2) {
+      console.log(
+        `${city} has been destroyed by ${aliensPresent[0]} and ${
+          aliensPresent[1]
+        }`
+      );
+    } else {
+      console.log(`${city} has been destroyed by ${aliensPresent}`);
+    }
   }
 
   printResults(aliens, cities) {

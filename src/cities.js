@@ -2,6 +2,8 @@
  * City interface and implementation.
  */
 
+const directions = new Set(["north", "south", "east", "west"]);
+
 class City {
   /**
    * Constructs a new city.
@@ -9,7 +11,7 @@ class City {
    * @param {string} name name of the city.
    */
   constructor(name) {
-    this.connections = { north: "", south: "", east: "", west: "" };
+    this.connections = {};
     this.destroyed = false;
     this.name = name;
   }
@@ -27,22 +29,24 @@ class City {
    * the specified directions and also checks for whether the directions
    * given is valid or not and is there any city present in that direction.
    */
-  connectCity(city, otherCity, direction) {
-    if (city.connections[direction] === undefined) {
+  connectCity(otherCity, direction) {
+    direction = direction.toLowerCase();
+
+    if (directions.has(direction)) {
+      if (this.connections[direction]) {
+        throw new Error(`Some city alreads exists in this direction`);
+      }
+      this.connections[direction] = otherCity;
+    } else {
       throw new Error(
         `Not a valid direction (direction can be north, south, east, west)`
       );
-    } else {
-      if (city.connections[direction] !== "") {
-        throw new Error(`Some city alreads exists in this direction`);
-      }
-      city.connections[direction] = otherCity;
-
-      // TODO: handle case for opposite directions also
-      // place city in opposite direction of otherCity to ensure consistency.
-
-      return city;
     }
+
+    // TODO: handle case for opposite directions also
+    // place city in opposite direction of otherCity to ensure consistency.
+
+    return this.get();
   }
 }
 

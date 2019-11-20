@@ -29,5 +29,6 @@ exports.buildSimulation = processArgv => {
   const invasion = new SimulateInvasion(worldMap, args.alienCount);
   invasion.init();
   invasion.play();
-  invasion.calulateSimulationResults();
 };
+
+exports.playSimulation = () => {};

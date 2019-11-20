@@ -16,13 +16,13 @@ class WorldMap {
   }
 
   /**
-   * parseMap parses the each line present in the input and making it a world map graph
+   * parseMap parses the each line present in the input and making it a world map directed graph
    data structure which is represented as a adjacency list.
 
    * we are choosing to represent our world map as a adjacency list because of couple of
    * benifits it offer over adjacency matrix and edge list.
 
-   *  NOTE: we can also add distances as weight to each city so that when alien chooses to 
+   *  NOTE: we can also add distances as weight to each city so that when alien chooses to
               move we will find the shortest distance and move alien accordingly.
    */
   parseMap() {
@@ -46,7 +46,6 @@ class WorldMap {
     mapItemSplit.forEach((item, index) => {
       if (index === 0) {
         city = new City(item);
-        addedCity = city.get();
       } else {
         const itemSplit = item.split("=");
 
@@ -59,11 +58,7 @@ class WorldMap {
         let direction = itemSplit[0],
           newCity = itemSplit[1];
 
-        this.cities[city.name] = city.connectCity(
-          addedCity,
-          newCity,
-          direction
-        );
+        this.cities[city.name] = city.connectCity(newCity, direction);
       }
     });
   }
