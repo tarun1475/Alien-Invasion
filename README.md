@@ -47,6 +47,8 @@ npm test
 
 ## Designing a finite state machine in Javascript
 
+State machines are generally represented with either Directed graphs or Two-dimensional tables.
+
 Designing a alien invasion simulation is a great example of finite state machine where we have different types of events
 which drive change of state in a program.
 
@@ -57,7 +59,7 @@ For a good finite machine there are couple of points which are taken into consid
 - Which state to transition to after the event
 - What variables need to be remembered between events
 
-In Aliens invasion simulation there are mainly two events which changes the behavior or state of the world map.
+In Aliens invasion simulation there are mainly two events change the behavior or state of the world map.
 
 ### Aliens Fight
 
@@ -66,8 +68,6 @@ This event is triggered when we have more than alien in a city in a single itera
 ### City Destroyed
 
 This event is triggered along with the aligns fight event.
-
-State machines are generally represented with either Directed graphs or Two-dimensional tables.
 
 ## Assumptions
 
@@ -85,4 +85,4 @@ State machines are generally represented with either Directed graphs or Two-dime
 - We can have some strategy for placing aliens on the map rather than a random function. Like there can be a list of
   strategies which can be loaded while we are starting the simulation and aliens can optimize their invasion efficiently.
 
-- Rather than aliens fighting each other and kill, we can have some units of energy attached to each alien and they die according to the energy consumption. Energy consumption could be calculated by the distance travelled by an alien for the maximum flow in a network.
+- Rather than aliens fighting each other and kill, we can have some units of energy attached to each alien and they die according to the energy consumption. Energy consumption could be calculated by the distance travelled by an alien and optimize the maximum flow in a network.
