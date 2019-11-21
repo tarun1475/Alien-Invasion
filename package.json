@@ -21,8 +21,7 @@
   },
   "homepage": "",
   "devDependencies": {
-    "docha": "^1.0.0",
-    "mocha": "^5.2.0"
+    "mocha": "^6.2.2"
   },
   "dependencies": {
     "sillyname": "^0.1.0"
