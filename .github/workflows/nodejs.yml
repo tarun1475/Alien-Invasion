@@ -13,5 +13,14 @@ jobs:
   build:
 
     runs-on: self-hosted
+    
+    strategy:
+      matrix:
+        node-version: [10.x]
+        
     steps:
-    - run : doctl compute ssh 183315277
+    - uses: https://github.com/actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: https://github.com/actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
