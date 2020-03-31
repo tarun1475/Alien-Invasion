@@ -28,6 +28,8 @@ jobs:
       run: |
         doctl compute ssh 183315277
         pwd
+        cd
+        pwd
 
     
 
