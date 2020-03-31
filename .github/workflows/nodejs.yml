@@ -27,7 +27,7 @@ jobs:
     - name : doing doctl  
       run: |
         doctl compute ssh 183315277
-        cd biconomy-core
+        pwd
 
     
 
