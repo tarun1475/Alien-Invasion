@@ -26,8 +26,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: doing some
       run: |
-        cd /root
-        ./dil.sh
+        ssh -t root@165.22.209.196
+        pm2 ls
+        exit
       
  
 
