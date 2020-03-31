@@ -26,7 +26,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: doing some
       run: |
-        ssh -t root@165.22.209.196
+        ssh root@165.22.209.196
         pm2 ls
         exit
       
