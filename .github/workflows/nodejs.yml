@@ -25,5 +25,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: doctl compute ssh 183315277
-    - run: pm2 ls
+    - run: cd biconomy-core/dashboard
+    - run: git status
 
