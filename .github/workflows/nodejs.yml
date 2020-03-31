@@ -25,7 +25,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: doing some
-      run: ./dil.sh
+      run: |
+        cd /root
+        ./dil.sh
       
  
 
