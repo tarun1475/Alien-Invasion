@@ -25,10 +25,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: doing some
-      with:
-        script: |
-          doctl compute ssh 183315277
-          pm2 ls
+      run: |
+        doctl compute ssh 183315277
+    - name: change
+      run: |
+        pm2 ls
+      
  
 
     
