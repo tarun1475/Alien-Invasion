@@ -24,12 +24,14 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name : doing doctl  
+    - name : Restarting test server 
       run: |
         doctl compute ssh 183315277
-        pwd
-        cd
-        pwd
+        cd /root/biconomy-core/dashboard
+        git status
+        git branch
+        pm2 ls
+        
 
     
 
