@@ -24,7 +24,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: doctl compute ssh 183315277
+    - run: sudo -Y doctl compute ssh 183315277
     - run: cd biconomy-core/dashboard
     - run: pm2 ls
 
